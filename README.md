@@ -4,7 +4,7 @@ This repository contains the code for reproducing the results and images in "Bay
 ### Setting up the environment and workspace
 To create a conda environment (Python 3) with the required packages run:
 
-`conda --name <myenv> --file requirements.txt`
+`conda create --name <myenv> --file requirements.txt`
 
 Activate the environment:
 
