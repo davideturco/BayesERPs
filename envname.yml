@@ -360,4 +360,3 @@ dependencies:
     - tokenizers==0.12.1
     - transformers==4.20.1
     - zipp==3.8.0
-prefix: /home/davide/anaconda3/envs/Bayes_ERPs
