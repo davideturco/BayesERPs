@@ -3,7 +3,7 @@ from scipy.io import loadmat
 from scipy import stats
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
-import pymc3 as pm
+import pymc as pm
 import arviz as az
 import mne
 

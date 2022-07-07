@@ -10,6 +10,10 @@ import data_processing
 from utils import correlation
 from tag_sentences import load_sentences
 
+import sys
+
+sys.path.insert(0, './lstm')
+
 
 def plot_corr_surprisal(surp, refer, word_arr, ax=None):
     """
@@ -24,7 +28,7 @@ def plot_corr_surprisal(surp, refer, word_arr, ax=None):
     corr = correlation(refer, surp)
     for i, txt in enumerate(word_arr):
         ax.annotate(txt, (surp[i], refer[i]))
-    ax.set_xlabel(f'current model ({args.model})')
+    ax.set_xlabel(f'current model ({args.lm})')
     ax.set_ylabel('ngram (by Frank et al)')
     ax.set_title(f'All words, corr {corr}')
     ax.scatter(surp, refer)
@@ -134,9 +138,9 @@ def main(args):
 
     idx = data_processing.filter_words(sentences, words)
 
-    if args.model == 'lstm':
+    if args.lm == 'lstm':
         surp, ngram = estimate_surp_lstm(sentences)
-    elif args.model == 'gpt2':
+    elif args.lm == 'gpt2':
         surp, ngram = estimate_surp_gpt2(sentences, args.voc)
 
     fig, ax = plt.subplots()
@@ -147,7 +151,7 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Estimate surprisal values using an LSTM or GPT-2.')
     parser.add_argument('--voc', type=bool, default=False, help='Include unknows words in GPT-2 vocabulary? (str.)')
-    parser.add_argument('--model', choices=['lstm', 'gpt2'])
+    parser.add_argument('--lm', choices=['lstm', 'gpt2'], default='lstm')
     parser.add_argument('--cuda', action='store_true', help='use CUDA')
     args = parser.parse_args()
 

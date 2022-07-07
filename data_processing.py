@@ -225,19 +225,19 @@ def generate_dataframe(file, ERP_component, lan_model, subjects, num_words, word
 
 def main():
     parser = argparse.ArgumentParser(description='Processing data from Frank et al (2015). Please choose settings')
-    parser.add_argument('-erp', default='N400', choices=['N400', 'all'],
+    parser.add_argument('--erp', default='N400', choices=['N400', 'all'],
                         help='ERP components to include: either \'N400\' component '
                              'or \'all\' components (default: N400)')
-    parser.add_argument('-lm', type=str, default='ngram', choices=['ngram', 'lstm', 'gpt2'],
+    parser.add_argument('--lm', type=str, default='ngram', choices=['ngram', 'lstm', 'gpt2'],
                         help='Language mode  to consider, either \'ngram\' or \'lstm\' or \'gpt\' (default: ngram)')
-    parser.add_argument('-sj', type=int, default='12', help='Number of subjects to include (default: 12)')
-    parser.add_argument('-nw', type=int, default='1931', help='Number of words to include (default: 1931)')
-    parser.add_argument('-wd', type=str, default='words', choices=['words', 'type'],
+    parser.add_argument('--sj', type=int, default='24', help='Number of subjects to include (default: 24)')
+    parser.add_argument('--nw', type=int, default='1931', help='Number of words to include (default: 1931)')
+    parser.add_argument('--wd', type=str, default='type', choices=['words', 'type'],
                         help='Include all words (\'words\')'
                              ' or only word type (\'type\') '
                              '(default \'words\')')
-    parser.add_argument('-sv', type=bool, default=False, help='Save dataframe object? (default: False)')
-    parser.add_argument('-it', type=bool, default=False, help='Include interaction terms? (default: False)')
+    parser.add_argument('--sv', type=bool, default=True, help='Save dataframe object? (default: True)')
+    parser.add_argument('--it', type=bool, default=False, help='Include interaction terms? (default: False)')
 
     args = parser.parse_args()
 

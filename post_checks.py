@@ -320,9 +320,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Posterior predictive checks')
 
     # parser.add_argument('-ppc', type=str, default='ppc_nc.pkl', help='Path to the PPC samples (str.)')
-    parser.add_argument('-lm', choices=['ngram', 'lstm', 'gpt2'],
+    parser.add_argument('--lm', choices=['ngram', 'lstm', 'gpt2'], default='ngram',
                         help='Language model used [\'ngram\', \'lstm\', \'gpt2\']')
-    parser.add_argument('-check', choices=['ppc', 'contributions', 'tags', 'components', 'topography', 'all'],
+    parser.add_argument('--check', choices=['ppc', 'contributions', 'tags', 'components', 'topography', 'all'], default='components',
                         help='Post-predictive check to be performed.')
     args = parser.parse_args()
     lm = args.lm

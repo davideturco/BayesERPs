@@ -1,8 +1,5 @@
 import pymc as pm
-import pandas as pd
-import theano.tensor as tt
 import numpy as np
-import pymc.sampling_jax
 from sklearn.linear_model import LinearRegression
 
 
@@ -62,10 +59,13 @@ class HierarchicalModel_complete_nc_type:
             self.erp = pm.Normal("erp", mu=self.mu_i, sigma=self.sigma_within,
                                  observed=self.data["ERP"].values)
 
-    def sample(self, num=3000, tune=1000, cores=4, target=.9):
+    def sample(self, num=3000, tune=1000, cores=4, target=.9, backend='default'):
         with self.nc:
-            # self.trace = pm.sample(num, tune=tune, cores=cores, return_inferencedata=True, target_accept=target)
-            self.trace = pm.sampling_jax.sample_numpyro_nuts(num, tune=tune, chains=cores, target_accept=target)
+            if backend == 'jax':
+                import pymc.sampling_jax
+                self.trace = pm.sampling_jax.sample_numpyro_nuts(num, tune=tune, chains=cores, target_accept=target)
+            else:
+                self.trace = pm.sample(num, tune=tune, cores=cores, return_inferencedata=True, target_accept=target)
         return self.trace
 
 
